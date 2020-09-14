@@ -83,6 +83,7 @@ public:
     bool resetEnergy();
 
     void search();
+    bool check();
 
 private:
 

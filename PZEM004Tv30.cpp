@@ -300,7 +300,7 @@ uint8_t PZEM004Tv30::getAddress()
  *
  * Set power alarm threshold in watts
  *
- * @param[in] watts Alamr theshold
+ * @param[in] watts Alarm theshold
  *
  * @return success
 */
@@ -323,7 +323,7 @@ bool PZEM004Tv30::setPowerAlarm(uint16_t watts)
  * Is the power alarm set
  *
  *
- * @return arlam triggerd
+ * @return alarm triggerd
 */
 bool PZEM004Tv30::getPowerAlarm()
 {
@@ -603,4 +603,22 @@ void PZEM004Tv30::search(){
         }
     }
 #endif
+}
+
+/*!
+ * PZEM004Tv30::check
+ *
+ * Check device availability
+ *
+ * @return success
+*/
+bool PZEM004Tv30::check(){
+    static uint8_t response[7];
+    sendCmd8(CMD_RIR, 0x00, 0x01, false);
+
+    if(recieve(response, 7) != 7){ // Invalid respond
+        return false;
+    } else {
+        return true;
+    }
 }
